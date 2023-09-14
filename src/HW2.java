@@ -54,6 +54,15 @@ public class HW2 {
         System.out.println("Modified Merge Sort Time:" + time3 + " nanoseconds, " + (float)time3/1000000 + " milliseconds, or " + (float)time3/1000000000 + " seconds");
         array = originalArray; //resets the array
 
+        long timeInit4 = System.nanoTime(); //records initial system time in nanoseconds
+        heapSort(array);
+        long timeFinal4 = System.nanoTime(); // records final system time in nanoseconds
+        long time4 = timeFinal4 - timeInit4; //calculates time taken for modified heap sort algorithm
+        // for (int i = 0; i < array.length; i++) { //prints each value of the array after sorting to verify results (testing only)
+        //     System.out.println(array[i]);
+        // }
+        System.out.println("Heap Sort Time:" + time4 + " nanoseconds, " + (float)time4/1000000 + " milliseconds, or " + (float)time4/1000000000 + " seconds");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -118,6 +127,43 @@ public class HW2 {
                 array[k] = tempArray[i];
                 i++;
             }
+        }
+    }
+
+    public static void buildMaxHeap(int[] array) { //builds the max heap by iterating down the array calls maxHeapify() to ensure that the subtree rooted at i is a valid max heap
+        int heapSize = array.length;
+        for (int i = heapSize / 2 - 1; i >= 0; i--) { //initializes i to the last non-leaf node 
+            maxHeapify(array, i, heapSize);
+        }
+    }
+
+    public static void maxHeapify(int[] array, int i, int heapSize) {
+        int largest = i;
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+        if (left < heapSize && array[left] > array[largest]) {
+            largest = left;
+        }
+        if (right < heapSize && array[right] > array[largest]) {
+            largest = right;
+        }
+        else {
+            if (largest != i) {
+                int temp = array[i];
+                array[i] = array[largest];
+                array[largest] = temp;
+                maxHeapify(array,i,heapSize);
+            }
+        }
+    }
+    
+    public static void heapSort(int[] array) {
+        buildMaxHeap(array);
+        for (int i = array.length - 1; i > 0; i--) {
+            int temp = array[0];
+            array[0] = array[i];
+            array[i] = temp;
+            maxHeapify(array,i,0);
         }
     }
 
