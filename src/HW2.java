@@ -62,12 +62,14 @@ public class HW2 {
         //     System.out.println(array[i]);
         // }
         System.out.println("Heap Sort Time:" + time4 + " nanoseconds, " + (float)time4/1000000 + " milliseconds, or " + (float)time4/1000000000 + " seconds");
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
+
+    /*
+
+    */
     public static void insertationSort(int[] array) {
         int i, j, k; //initializes count variables
         for (i = 0; i < array.length; i++) {
@@ -81,6 +83,9 @@ public class HW2 {
         }
     }
 
+    /*
+    
+    */
     public static void mergeSort(int[] array, int[] tempArray, int p, int r) {
         if (p < r) {
             int q = (p + r) / 2; //calculate middle index
@@ -90,6 +95,9 @@ public class HW2 {
         }
     }
 
+    /*
+    
+    */
     public static void modifiedMergeSort(int[] array, int[] tempArray, int p, int r) {
         if (p < r) {
             if (r - p <= insertion_sort_threshold) { //runs insertion sort algorithm if array size is less than or equal to the threshold
@@ -104,6 +112,9 @@ public class HW2 {
         }
     }
 
+    /*
+    
+    */
     public static void merge(int[] array, int[] tempArray, int p, int q, int r) {
         int i = p; //initializing pointer to starting index of left subarray
         int j = q + 1; //initializing pointer to starting index of right subarray
@@ -130,37 +141,44 @@ public class HW2 {
         }
     }
 
+    /*
+    
+    */
     public static void buildMaxHeap(int[] array) { //builds the max heap by iterating down the array calls maxHeapify() to ensure that the subtree rooted at i is a valid max heap
         int heapSize = array.length;
         for (int i = heapSize / 2 - 1; i >= 0; i--) { //initializes i to the last non-leaf node 
-            maxHeapify(array, i, heapSize);
-        }
-    }
-
-    public static void maxHeapify(int[] array, int i, int heapSize) {
-        int largest = i;
-        int left = 2 * i + 1;
-        int right = 2 * i + 2;
-        if (left < heapSize && array[left] > array[largest]) {
-            largest = left;
-        }
-        if (right < heapSize && array[right] > array[largest]) {
-            largest = right;
-        }
-        else {
-            if (largest != i) {
-                int temp = array[i];
-                array[i] = array[largest];
-                array[largest] = temp;
-                maxHeapify(array,i,heapSize);
-            }
+            maxHeapify(array, heapSize, i);
         }
     }
     
-    public static void heapSort(int[] array) {
+    /*
+    
+    */
+    public static void maxHeapify(int[] array, int i, int heapSize) { //maintains the max heap properties during each recursion of heapSort() 
+        int largest = i; //index of the parent
+        int left = 2 * i + 1; //index of the left leaf
+        int right = 2 * i + 2; //index of the right leaf
+        if (left < heapSize && array[left] > array[largest]) { //if index of the left leaf is less than the heap size and the value of the left leaf is greater than the parent value
+            largest = left; //set left leaf to parent
+        }
+        if (right < heapSize && array[right] > array[largest]) { //if index of the right leaf is less than the heap size and the value of the right leaf is greater than the parent value
+            largest = right; //set right leaf to parent
+        }
+        if (largest != i) { //if the largest parent value is not the largest value in the heap rebuild the maxheap
+            int temp = array[i]; 
+            array[i] = array[largest];
+            array[largest] = temp;
+            maxHeapify(array,heapSize,largest);
+        }
+    }
+    
+    /*
+    
+    */
+    public static void heapSort(int[] array) { //calls buildMaxHeap() to build the max heap then iterates down the heap calling maxHeapify() to sort the heap
         buildMaxHeap(array);
         for (int i = array.length - 1; i > 0; i--) {
-            int temp = array[0];
+            int temp = array[i];
             array[0] = array[i];
             array[i] = temp;
             maxHeapify(array,i,0);
