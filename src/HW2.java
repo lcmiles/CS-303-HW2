@@ -68,7 +68,7 @@ public class HW2 {
     }
 
     /*
-
+    
     */
     public static void insertationSort(int[] array) {
         int i, j, k; //initializes count variables
