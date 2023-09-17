@@ -6,10 +6,10 @@ public class HW2 {
 
     private static int[] originalArray;
     private static int[] array;
-    private static final int insertion_sort_threshold = 7; //sets the constant insertion sorting threshold for the modified merge sort algorithm
+    private static final int insertionSortThreshold = 7; //sets the constant insertion sorting threshold for the modified merge sort algorithm
 
     public static void main(String[] arg) {
-        try (Scanner reader = new Scanner(Paths.get("1000000.txt"))) {
+        try (Scanner reader = new Scanner(Paths.get("1000.txt"))) {
             while (reader.hasNextLine()) {
             String intString = reader.nextLine();
             String[] stringArray = intString.split("\\s*,\\s*"); //splits the string at each " , " and adds each individual string to an array
@@ -68,7 +68,10 @@ public class HW2 {
     }
 
     /*
-    
+    Description: insertionSort() iterates through each element in the array and compares the value of the current index to 
+    that of the previous index moving the value back until the value of the previous index is less than the current
+    Parameters: int[] array is an array of integers read from the text file in main()
+    Returns: nothing
     */
     public static void insertationSort(int[] array) {
         int i, j, k; //initializes count variables
@@ -84,7 +87,14 @@ public class HW2 {
     }
 
     /*
-    
+    Description: mergeSort() calculates the middle index, if the recursively calls mergeSort() on the left and right subarrays in order to sort them, 
+    then calls merge() to merge the newly sorted subarrays
+    Parameters: 
+    int[] array is an array of integers read from the text file in main()
+    int[] temparray is a temporary copy of array for iteration purposes
+    int p is a pointer for starting index of left subarray
+    int r is a pointer for starting index of right subarray
+    Returns: nothing
     */
     public static void mergeSort(int[] array, int[] tempArray, int p, int r) {
         if (p < r) {
@@ -96,11 +106,18 @@ public class HW2 {
     }
 
     /*
-    
+    Description: modifiedMergeSort() works similarly to mergeSort(), only the algorithm implements insertionSort() when the array size has been reduced to less
+    than or equal to insertionSortThreshold
+    Parameters:
+    int[] array is an array of integers read from the text file in main()
+    int[] temparray is a temporary copy of array for iteration purposes
+    int p is a pointer for starting index of left subarray
+    int r is a pointer for starting index of right subarray
+    Returns: nothing
     */
     public static void modifiedMergeSort(int[] array, int[] tempArray, int p, int r) {
         if (p < r) {
-            if (r - p <= insertion_sort_threshold) { //runs insertion sort algorithm if array size is less than or equal to the threshold
+            if (r - p <= insertionSortThreshold) { //runs insertion sort algorithm if array size is less than or equal to the threshold
                 insertationSort(array);
             }
             else { //else runs mergesort algorithm
@@ -113,7 +130,14 @@ public class HW2 {
     }
 
     /*
-    
+    Description: merge() is called in mergeSort(), and it 
+    Parameters:
+    int[] array is an array of integers read from the text file in main()
+    int[] temparray is a temporary copy of array for iteration purposes
+    int p is a pointer for starting index of left subarray
+    int r is a pointer for starting index of right subarray
+    int q is a pointer for middle index of the original array
+    Returns: nothing
     */
     public static void merge(int[] array, int[] tempArray, int p, int q, int r) {
         int i = p; //initializing pointer to starting index of left subarray
@@ -142,9 +166,11 @@ public class HW2 {
     }
 
     /*
-    
+    Description: buildMaxHeap() builds the max heap by iterating down the array calls maxHeapify() to ensure that the subtree rooted at i is a valid max heap
+    Parameters: int[] array is an array of integers read from the text file in main()
+    Returns: nothing
     */
-    public static void buildMaxHeap(int[] array) { //builds the max heap by iterating down the array calls maxHeapify() to ensure that the subtree rooted at i is a valid max heap
+    public static void buildMaxHeap(int[] array) { 
         int heapSize = array.length;
         for (int i = heapSize / 2 - 1; i >= 0; i--) { //initializes i to the last non-leaf node 
             maxHeapify(array, heapSize, i);
@@ -152,9 +178,14 @@ public class HW2 {
     }
     
     /*
-    
+    Description: maxHeapify() maintains the max heap properties during each recursion of heapSort() 
+    Parameters: 
+    int[] array is an array of integers read from the text file in main()
+    int i is the parent iterated over in buildMaxHeap()
+    int heapSize is the number of elements in the heap
+    Returns: nothing
     */
-    public static void maxHeapify(int[] array, int i, int heapSize) { //maintains the max heap properties during each recursion of heapSort() 
+    public static void maxHeapify(int[] array, int i, int heapSize) { 
         int largest = i; //index of the parent
         int left = 2 * i + 1; //index of the left leaf
         int right = 2 * i + 2; //index of the right leaf
@@ -173,9 +204,11 @@ public class HW2 {
     }
     
     /*
-    
+    Description: calls buildMaxHeap() to build the max heap then iterates down the heap calling maxHeapify() to sort the heap
+    Parameters: int[] array is an array of integers read from the text file in main()
+    Returns: nothing
     */
-    public static void heapSort(int[] array) { //calls buildMaxHeap() to build the max heap then iterates down the heap calling maxHeapify() to sort the heap
+    public static void heapSort(int[] array) { 
         buildMaxHeap(array);
         for (int i = array.length - 1; i > 0; i--) {
             int temp = array[i];
