@@ -9,7 +9,7 @@ public class HW2 {
     private static final int insertionSortThreshold = 7; //sets the constant insertion sorting threshold for the modified merge sort algorithm
 
     public static void main(String[] arg) {
-        try (Scanner reader = new Scanner(Paths.get("1000.txt"))) {
+        try (Scanner reader = new Scanner(Paths.get("10.txt"))) {
             while (reader.hasNextLine()) {
             String intString = reader.nextLine();
             String[] stringArray = intString.split("\\s*,\\s*"); //splits the string at each " , " and adds each individual string to an array
@@ -33,35 +33,35 @@ public class HW2 {
         System.out.println("Insertion Sort Time:" + time + " nanoseconds, " + (float)time/1000000 + " milliseconds, or " + (float)time/1000000000 + " seconds");
         array = originalArray; //resets the array
 
-        long timeInit2 = System.nanoTime(); //records initial system time in nanoseconds
+        timeInit = System.nanoTime(); //records initial system time in nanoseconds
         int[] tempArray = new int[array.length];
         mergeSort(array, tempArray, 0, array.length - 1); 
-        long timeFinal2 = System.nanoTime(); // records final system time in nanoseconds
-        long time2 = timeFinal2 - timeInit2; //calculates time taken for merge sort algorithm
+        timeFinal = System.nanoTime(); // records final system time in nanoseconds
+        time = timeFinal - timeInit; //calculates time taken for merge sort algorithm
         // for (int i = 0; i < array.length; i++) { //prints each value of the array after sorting to verify results (testing only)
         //     System.out.println(array[i]);
         // }
-        System.out.println("Merge Sort Time:" + time2 + " nanoseconds, " + (float)time2/1000000 + " milliseconds, or " + (float)time2/1000000000 + " seconds");
+        System.out.println("Merge Sort Time:" + time + " nanoseconds, " + (float)time/1000000 + " milliseconds, or " + (float)time/1000000000 + " seconds");
         array = originalArray; //resets the array
 
-        long timeInit3 = System.nanoTime(); //records initial system time in nanoseconds
+        timeInit = System.nanoTime(); //records initial system time in nanoseconds
         modifiedMergeSort(array, tempArray, 0, array.length - 1); 
-        long timeFinal3 = System.nanoTime(); // records final system time in nanoseconds
-        long time3 = timeFinal3 - timeInit3; //calculates time taken for modified merge sort algorithm
+        timeFinal = System.nanoTime(); // records final system time in nanoseconds
+        time = timeFinal - timeInit; //calculates time taken for modified merge sort algorithm
         // for (int i = 0; i < array.length; i++) { //prints each value of the array after sorting to verify results (testing only)
         //     System.out.println(array[i]);
         // }
-        System.out.println("Modified Merge Sort Time:" + time3 + " nanoseconds, " + (float)time3/1000000 + " milliseconds, or " + (float)time3/1000000000 + " seconds");
+        System.out.println("Modified Merge Sort Time:" + time + " nanoseconds, " + (float)time/1000000 + " milliseconds, or " + (float)time/1000000000 + " seconds");
         array = originalArray; //resets the array
 
-        long timeInit4 = System.nanoTime(); //records initial system time in nanoseconds
+        timeInit = System.nanoTime(); //records initial system time in nanoseconds
         heapSort(array);
-        long timeFinal4 = System.nanoTime(); // records final system time in nanoseconds
-        long time4 = timeFinal4 - timeInit4; //calculates time taken for modified heap sort algorithm
+        timeFinal = System.nanoTime(); // records final system time in nanoseconds
+        time = timeFinal - timeInit; //calculates time taken for modified heap sort algorithm
         // for (int i = 0; i < array.length; i++) { //prints each value of the array after sorting to verify results (testing only)
         //     System.out.println(array[i]);
         // }
-        System.out.println("Heap Sort Time:" + time4 + " nanoseconds, " + (float)time4/1000000 + " milliseconds, or " + (float)time4/1000000000 + " seconds");
+        System.out.println("Heap Sort Time:" + time + " nanoseconds, " + (float)time/1000000 + " milliseconds, or " + (float)time/1000000000 + " seconds");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -137,7 +137,8 @@ public class HW2 {
     }
 
     /*
-    Description: merge() is called in mergeSort(), and it 
+    Description: merge() is called in mergeSort(), and it is responsible for adding the values in the correct order from the subarrays back into the array they
+    were divided from until the whole array is sorted
     Parameters:
     int[] array is an array of integers read from the text file in main()
     int[] temparray is a temporary copy of array for iteration purposes
