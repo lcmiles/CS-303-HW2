@@ -7,10 +7,10 @@ public class HW2 {
     private static String s = "";
     private static int[] originalArray;
     private static int[] array;
-    private static final int insertionSortThreshold = 7; //sets the constant insertion sorting threshold for the modified merge sort algorithm
+    private static int insertionSortThreshold = 7; //sets the constant insertion sorting threshold for the modified merge sort algorithm
 
     public static void main(String[] arg) {
-        try (Scanner reader = new Scanner(Paths.get("1000000.txt"))) {
+        try (Scanner reader = new Scanner(Paths.get("1000.txt"))) {
             while (reader.hasNextLine()) {
             String intString = reader.nextLine();
             String[] stringArray = intString.split("\\s*,\\s*"); //splits the string at each " , " and adds each individual string to an array
