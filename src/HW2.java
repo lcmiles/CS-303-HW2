@@ -28,7 +28,6 @@ public class HW2 {
         insertationSort(array); 
         long timeFinal = System.nanoTime(); // records final system time in nanoseconds
         long time = timeFinal - timeInit; //calculates time taken for insertion sort algorithm
-        // s = "";
         // for (int i = 0; i < array.length; i++) { //prints each value of the array after sorting to verify results (testing only)
         //     s = s + "," + array[i];
         // }
