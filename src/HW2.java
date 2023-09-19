@@ -9,7 +9,7 @@ public class HW2 {
     private static final int insertionSortThreshold = 7; //sets the constant insertion sorting threshold for the modified merge sort algorithm
 
     public static void main(String[] arg) {
-        try (Scanner reader = new Scanner(Paths.get("10.txt"))) {
+        try (Scanner reader = new Scanner(Paths.get("10000.txt"))) {
             while (reader.hasNextLine()) {
             String intString = reader.nextLine();
             String[] stringArray = intString.split("\\s*,\\s*"); //splits the string at each " , " and adds each individual string to an array
@@ -58,9 +58,9 @@ public class HW2 {
         heapSort(array);
         timeFinal = System.nanoTime(); // records final system time in nanoseconds
         time = timeFinal - timeInit; //calculates time taken for modified heap sort algorithm
-        // for (int i = 0; i < array.length; i++) { //prints each value of the array after sorting to verify results (testing only)
-        //     System.out.println(array[i]);
-        // }
+        for (int i = 0; i < array.length; i++) { //prints each value of the array after sorting to verify results (testing only)
+            System.out.println(array[i]);
+        }
         System.out.println("Heap Sort Time:" + time + " nanoseconds, " + (float)time/1000000 + " milliseconds, or " + (float)time/1000000000 + " seconds");
         } catch (IOException e) {
             e.printStackTrace();
@@ -96,7 +96,7 @@ public class HW2 {
     int[] array is an array of integers read from the text file in main()
     int[] temparray is a temporary copy of array for iteration purposes
     int p is a pointer for starting index of left subarray
-    int r is a pointer for starting index of right subarray
+    int r is a pointer for ending index of right subarray
     Returns: nothing
     Citations: 
     https://chat.openai.com/share/c8f53e73-fb52-483b-846c-c756faa3bc6e
@@ -118,7 +118,7 @@ public class HW2 {
     int[] array is an array of integers read from the text file in main()
     int[] temparray is a temporary copy of array for iteration purposes
     int p is a pointer for starting index of left subarray
-    int r is a pointer for starting index of right subarray
+    int r is a pointer for ending index of right subarray
     Returns: nothing
     Citations: https://chat.openai.com/share/c8f53e73-fb52-483b-846c-c756faa3bc6e
     */
@@ -143,7 +143,7 @@ public class HW2 {
     int[] array is an array of integers read from the text file in main()
     int[] temparray is a temporary copy of array for iteration purposes
     int p is a pointer for starting index of left subarray
-    int r is a pointer for starting index of right subarray
+    int r is a pointer for ending index of right subarray
     int q is a pointer for middle index of the original array
     Returns: nothing
     Citations: https://chat.openai.com/share/c8f53e73-fb52-483b-846c-c756faa3bc6e
@@ -155,19 +155,19 @@ public class HW2 {
             tempArray[k] = array[k];
         }
         for (int k = p; k <= r; k++) {
-            if (i > q) { //if left half is empty, copy from the right
+            if (i > q) { //if left subarray is empty, copy the element from the right subarray to the main array
                 array[k] = tempArray[j];
                 j++;
             }
-            else if (j > r) { //if right half is empty, copy from the left
+            else if (j > r) { //if right subarray is empty, copy the element the left subarray to the main array
                 array[k] = tempArray[i];
                 i++;
             }
-            else if (tempArray[j] < tempArray[i]) { //if neither copy from the right
+            else if (tempArray[j] < tempArray[i]) { //if the right element is smaller than the left element, copy the element from the right subarray to the main array
                 array[k] = tempArray[j];
                 j++;
             }
-            else { //else copy from left
+            else { //else copy the element from the left subarray to the main array
                 array[k] = tempArray[i];
                 i++;
             }
@@ -175,7 +175,7 @@ public class HW2 {
     }
 
     /*
-    Description: buildMaxHeap() builds the max heap by iterating down the array calls maxHeapify() to ensure that the subtree rooted at i is a valid max heap
+    Description: buildMaxHeap() builds the max heap by iterating down the array and calling maxHeapify() on non-leaf node to ensure that the subtree rooted at i is a valid max heap
     Parameters: int[] array is an array of integers read from the text file in main()
     Returns: nothing
     Citations: https://chat.openai.com/share/1fb9df06-3160-486e-90f1-8587877af3e9
@@ -206,7 +206,7 @@ public class HW2 {
         if (right < heapSize && array[right] > array[largest]) { //if index of the right leaf is less than the heap size and the value of the right leaf is greater than the parent value
             largest = right; //set right leaf to parent
         }
-        if (largest != i) { //if the largest parent value is not the largest value in the heap rebuild the maxheap
+        if (largest != i) { //if the largest element is not the root of the maxheap, swap them and recursively heapify the affected sub-tree
             int temp = array[i]; 
             array[i] = array[largest];
             array[largest] = temp;
@@ -223,11 +223,7 @@ public class HW2 {
     public static void heapSort(int[] array) { 
         buildMaxHeap(array);
         for (int i = array.length - 1; i > 0; i--) {
-            int temp = array[i];
-            array[0] = array[i];
-            array[i] = temp;
             maxHeapify(array,i,0);
         }
     }
-
 }
