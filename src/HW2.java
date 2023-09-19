@@ -10,7 +10,7 @@ public class HW2 {
     private static final int insertionSortThreshold = 7; //sets the constant insertion sorting threshold for the modified merge sort algorithm
 
     public static void main(String[] arg) {
-        try (Scanner reader = new Scanner(Paths.get("10000.txt"))) {
+        try (Scanner reader = new Scanner(Paths.get("1000.txt"))) {
             while (reader.hasNextLine()) {
             String intString = reader.nextLine();
             String[] stringArray = intString.split("\\s*,\\s*"); //splits the string at each " , " and adds each individual string to an array
@@ -29,9 +29,14 @@ public class HW2 {
         long timeFinal = System.nanoTime(); // records final system time in nanoseconds
         long time = timeFinal - timeInit; //calculates time taken for insertion sort algorithm
         // for (int i = 0; i < array.length; i++) { //prints each value of the array after sorting to verify results (testing only)
-        //     s = s + "," + array[i];
+        //     if (i == 0) {
+        //         s = s + array[i]; 
+        //     }
+        //     else {
+        //         s = s + "," + array[i];
+        //     }
         // }
-        System.out.println(s);
+        // System.out.println(s);
         System.out.println("Insertion Sort Time:" + time + " nanoseconds, " + (float)time/1000000 + " milliseconds, or " + (float)time/1000000000 + " seconds");
         array = originalArray; //resets the array
 
@@ -42,9 +47,14 @@ public class HW2 {
         time = timeFinal - timeInit; //calculates time taken for merge sort algorithm
         // s = "";
         // for (int i = 0; i < array.length; i++) { //prints each value of the array after sorting to verify results (testing only)
-        //     s = s + "," + array[i];
+        //     if (i == 0) {
+        //         s = s + array[i]; 
+        //     }
+        //     else {
+        //         s = s + "," + array[i];
+        //     }
         // }
-        System.out.println(s);
+        // System.out.println(s);
         System.out.println("Merge Sort Time:" + time + " nanoseconds, " + (float)time/1000000 + " milliseconds, or " + (float)time/1000000000 + " seconds");
         array = originalArray; //resets the array
 
@@ -54,9 +64,14 @@ public class HW2 {
         time = timeFinal - timeInit; //calculates time taken for modified merge sort algorithm
         // s = "";
         // for (int i = 0; i < array.length; i++) { //prints each value of the array after sorting to verify results (testing only)
-        //     s = s + "," + array[i];
+        //     if (i == 0) {
+        //         s = s + array[i]; 
+        //     }
+        //     else {
+        //         s = s + "," + array[i];
+        //     }
         // }
-        System.out.println(s);
+        // System.out.println(s);
         System.out.println("Modified Merge Sort Time:" + time + " nanoseconds, " + (float)time/1000000 + " milliseconds, or " + (float)time/1000000000 + " seconds");
         array = originalArray; //resets the array
 
@@ -66,9 +81,14 @@ public class HW2 {
         time = timeFinal - timeInit; //calculates time taken for modified heap sort algorithm
         // s = "";
         // for (int i = 0; i < array.length; i++) { //prints each value of the array after sorting to verify results (testing only)
-        //     s = s + "," + array[i];
+        //     if (i == 0) {
+        //         s = s + array[i]; 
+        //     }
+        //     else {
+        //         s = s + "," + array[i];
+        //     }
         // }
-        System.out.println(s);
+        // System.out.println(s);
         System.out.println("Heap Sort Time:" + time + " nanoseconds, " + (float)time/1000000 + " milliseconds, or " + (float)time/1000000000 + " seconds");
         } catch (IOException e) {
             e.printStackTrace();
