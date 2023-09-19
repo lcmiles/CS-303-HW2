@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class HW2 {
 
+    private static String s = "";
     private static int[] originalArray;
     private static int[] array;
     private static final int insertionSortThreshold = 7; //sets the constant insertion sorting threshold for the modified merge sort algorithm
@@ -27,9 +28,11 @@ public class HW2 {
         insertationSort(array); 
         long timeFinal = System.nanoTime(); // records final system time in nanoseconds
         long time = timeFinal - timeInit; //calculates time taken for insertion sort algorithm
+        // s = "";
         // for (int i = 0; i < array.length; i++) { //prints each value of the array after sorting to verify results (testing only)
-        //     System.out.println(array[i]);
+        //     s = s + "," + array[i];
         // }
+        System.out.println(s);
         System.out.println("Insertion Sort Time:" + time + " nanoseconds, " + (float)time/1000000 + " milliseconds, or " + (float)time/1000000000 + " seconds");
         array = originalArray; //resets the array
 
@@ -38,9 +41,11 @@ public class HW2 {
         mergeSort(array, tempArray, 0, array.length - 1); 
         timeFinal = System.nanoTime(); // records final system time in nanoseconds
         time = timeFinal - timeInit; //calculates time taken for merge sort algorithm
+        // s = "";
         // for (int i = 0; i < array.length; i++) { //prints each value of the array after sorting to verify results (testing only)
-        //     System.out.println(array[i]);
+        //     s = s + "," + array[i];
         // }
+        System.out.println(s);
         System.out.println("Merge Sort Time:" + time + " nanoseconds, " + (float)time/1000000 + " milliseconds, or " + (float)time/1000000000 + " seconds");
         array = originalArray; //resets the array
 
@@ -48,9 +53,11 @@ public class HW2 {
         modifiedMergeSort(array, tempArray, 0, array.length - 1); 
         timeFinal = System.nanoTime(); // records final system time in nanoseconds
         time = timeFinal - timeInit; //calculates time taken for modified merge sort algorithm
+        // s = "";
         // for (int i = 0; i < array.length; i++) { //prints each value of the array after sorting to verify results (testing only)
-        //     System.out.println(array[i]);
+        //     s = s + "," + array[i];
         // }
+        System.out.println(s);
         System.out.println("Modified Merge Sort Time:" + time + " nanoseconds, " + (float)time/1000000 + " milliseconds, or " + (float)time/1000000000 + " seconds");
         array = originalArray; //resets the array
 
@@ -58,9 +65,11 @@ public class HW2 {
         heapSort(array);
         timeFinal = System.nanoTime(); // records final system time in nanoseconds
         time = timeFinal - timeInit; //calculates time taken for modified heap sort algorithm
-        for (int i = 0; i < array.length; i++) { //prints each value of the array after sorting to verify results (testing only)
-            System.out.println(array[i]);
-        }
+        // s = "";
+        // for (int i = 0; i < array.length; i++) { //prints each value of the array after sorting to verify results (testing only)
+        //     s = s + "," + array[i];
+        // }
+        System.out.println(s);
         System.out.println("Heap Sort Time:" + time + " nanoseconds, " + (float)time/1000000 + " milliseconds, or " + (float)time/1000000000 + " seconds");
         } catch (IOException e) {
             e.printStackTrace();
